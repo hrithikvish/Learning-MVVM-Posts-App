@@ -12,6 +12,7 @@ import com.hrithikvish.mvvmpostsapp.databinding.FragmentRegisterBinding
 import com.hrithikvish.mvvmpostsapp.model.userModel.UserRequest
 import com.hrithikvish.mvvmpostsapp.util.NetworkResult
 import com.hrithikvish.mvvmpostsapp.util.UserIdManager
+import com.hrithikvish.mvvmpostsapp.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

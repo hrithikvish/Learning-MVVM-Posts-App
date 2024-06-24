@@ -38,14 +38,14 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_mainFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
+            android:id="@+id/action_mainFragment_to_postFragment"
+            app:destination="@id/postFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/noteFragment"
-        android:name="com.hrithikvish.mvvmpostsapp.NoteFragment"
+        android:id="@+id/postFragment"
+        android:name="com.hrithikvish.mvvmpostsapp.PostFragment"
         android:label="fragment_note"
-        tools:layout="@layout/fragment_note" />
+        tools:layout="@layout/fragment_post" />
 
 </navigation>

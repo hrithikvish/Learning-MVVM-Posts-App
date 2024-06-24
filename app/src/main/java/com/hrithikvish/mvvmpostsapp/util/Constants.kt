@@ -6,5 +6,6 @@ object Constants {
     const val TAG = "POST-TAG"
     const val PREF_USER_ID = "PREF_USER_ID"
     const val USER_ID = "USER_ID"
+    const val POST = "post"
 
 }

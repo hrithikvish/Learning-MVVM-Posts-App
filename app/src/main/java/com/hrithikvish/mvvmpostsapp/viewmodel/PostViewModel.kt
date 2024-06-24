@@ -1,4 +1,4 @@
-package com.hrithikvish.mvvmpostsapp
+package com.hrithikvish.mvvmpostsapp.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -23,7 +23,10 @@ class PostViewModel @Inject constructor(
     val addUpdateDeletePostResponseLiveData: LiveData<NetworkResult<Post>>
         get() = postRepository.addUpdateDeletePostResponseLiveData
 
-    fun getPosts(limit: Int, skip: Int) {
+    fun getPosts(
+        limit: Int = 30,
+        skip: Int = 0
+    ) {
         viewModelScope.launch {
             postRepository.getPosts(limit, skip)
         }
@@ -41,5 +44,10 @@ class PostViewModel @Inject constructor(
         }
     }
 
+    fun deletePost(postId: Int) {
+        viewModelScope.launch {
+            postRepository.deletePost(postId)
+        }
+    }
 
 }

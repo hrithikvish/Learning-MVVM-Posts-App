@@ -9,7 +9,7 @@ object NetworkResultHelper {
     fun <T> handleResponse(
         responseLiveData: MutableLiveData<NetworkResult<T>>,
         response: Response<T>,
-        operation: Operation
+        operation: Operation? = null
     ) {
         if (response.isSuccessful && response.body() != null) {
             responseLiveData.postValue(NetworkResult.Success(response.body()!!, operation))

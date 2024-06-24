@@ -17,8 +17,8 @@ interface PostsApi {
 
     @GET("/posts")
     suspend fun getPosts(
-        @Query("limit") limit: Int = 0,
-        @Query("skip") skip: Int = 0
+        @Query("limit") limit: Int,
+        @Query("skip") skip: Int
     ): Response<PostResponse>
 
     @POST("/posts/add")

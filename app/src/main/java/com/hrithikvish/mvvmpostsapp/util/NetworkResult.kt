@@ -25,5 +25,5 @@ sealed class NetworkResult<T>(
 }
 
 enum class Operation {
-    GET_POSTS, ADD_POST, UPDATE_POST, DELETE_POST
+    ADD_POST, UPDATE_POST, DELETE_POST
 }

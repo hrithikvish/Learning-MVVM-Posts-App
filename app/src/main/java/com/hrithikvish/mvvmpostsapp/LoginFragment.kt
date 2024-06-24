@@ -1,19 +1,19 @@
 package com.hrithikvish.mvvmpostsapp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.hrithikvish.mvvmpostsapp.R
 import com.hrithikvish.mvvmpostsapp.databinding.FragmentLoginBinding
 import com.hrithikvish.mvvmpostsapp.model.userModel.UserRequest
 import com.hrithikvish.mvvmpostsapp.util.NetworkResult
 import com.hrithikvish.mvvmpostsapp.util.UserIdManager
 import com.hrithikvish.mvvmpostsapp.util.ValidationUtil
+import com.hrithikvish.mvvmpostsapp.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.hrithikvish.mvvmpostsapp
+package com.hrithikvish.mvvmpostsapp.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
