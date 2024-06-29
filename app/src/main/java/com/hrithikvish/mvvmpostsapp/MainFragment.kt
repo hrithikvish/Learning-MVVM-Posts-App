@@ -1,5 +1,6 @@
 package com.hrithikvish.mvvmpostsapp
 
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,10 +11,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.hrithikvish.mvvmpostsapp.adapter.PostAdapter
 import com.hrithikvish.mvvmpostsapp.databinding.FragmentMainBinding
 import com.hrithikvish.mvvmpostsapp.model.postModel.Post
+import com.hrithikvish.mvvmpostsapp.util.ConnectivityChecker
 import com.hrithikvish.mvvmpostsapp.util.Constants
 import com.hrithikvish.mvvmpostsapp.util.NetworkResult
 import com.hrithikvish.mvvmpostsapp.util.Operation
@@ -34,6 +37,9 @@ class MainFragment : Fragment() {
     @Inject
     lateinit var userIdManager: UserIdManager
 
+    @Inject
+    lateinit var connectivityChecker: ConnectivityChecker
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,10 +54,58 @@ class MainFragment : Fragment() {
 
         bindObservers()
         setClickListeners()
-        postViewModel.getPosts()
-        binding.postRv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        binding.postRv.adapter = postAdapter
+        getPosts()
+        setPostRecyclerView()
 
+    }
+
+    private fun setPostRecyclerView() {
+        binding.postRv.layoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        binding.postRv.adapter = postAdapter
+    }
+
+    private fun getPosts() {
+        if (connectivityChecker.isConnected) {
+            postViewModel.getPosts()
+        } else {
+            showAlertDialog(
+                title = "Internet Connectivity",
+                message = "You're not connected to internet, kindly connect to internet.",
+                positiveButtonText = "OK"
+            )
+        }
+    }
+
+    private fun showAlertDialog(
+        title: String? = null,
+        message: String? = null,
+        positiveButtonText: String? = null,
+        negativeButtonText: String? = null,
+        neutralButtonText: String? = null
+    ) {
+        val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.ThemeOverlay_App_MaterialAlertDialog)
+            .setTitle(title)
+            .setMessage(message)
+            .setOnDismissListener { getPosts() }
+
+        positiveButtonText?.let {
+            dialog.setPositiveButton(it) { dialogInterface: DialogInterface, i: Int ->
+                dialogInterface.dismiss()
+            }
+        }
+        negativeButtonText?.let {
+            dialog.setNegativeButton(it) { dialogInterface: DialogInterface, i: Int ->
+                dialogInterface.dismiss()
+            }
+        }
+        neutralButtonText?.let {
+            dialog.setPositiveButton(it) { dialogInterface: DialogInterface, i: Int ->
+                dialogInterface.dismiss()
+            }
+        }
+
+        dialog.show()
     }
 
     private fun setClickListeners() {

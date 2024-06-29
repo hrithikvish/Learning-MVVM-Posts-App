@@ -15,7 +15,7 @@ import com.hrithikvish.mvvmpostsapp.util.Operation
 import javax.inject.Inject
 
 class PostRepository @Inject constructor(
-    private val postsApi: PostsApi
+    private val postsApi: PostsApi,
 ) {
 
     private var _getPostsResponseLiveData = MutableLiveData<NetworkResult<PostResponse>>()

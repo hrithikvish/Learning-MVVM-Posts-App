@@ -1,5 +1,6 @@
 package com.hrithikvish.mvvmpostsapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import com.hrithikvish.mvvmpostsapp.databinding.FragmentPostBinding
 import com.hrithikvish.mvvmpostsapp.model.postModel.Post
@@ -21,6 +21,7 @@ import com.hrithikvish.mvvmpostsapp.viewmodel.PostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@SuppressLint("SetTextI18n")
 @AndroidEntryPoint
 class PostFragment : Fragment() {
 
