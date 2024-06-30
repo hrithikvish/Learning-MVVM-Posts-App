@@ -13,8 +13,8 @@ android {
         applicationId = "com.hrithikvish.mvvmpostsapp"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "1.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -75,5 +75,7 @@ dependencies {
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
 
 }

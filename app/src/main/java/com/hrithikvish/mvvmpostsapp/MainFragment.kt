@@ -90,17 +90,17 @@ class MainFragment : Fragment() {
             .setOnDismissListener { getPosts() }
 
         positiveButtonText?.let {
-            dialog.setPositiveButton(it) { dialogInterface: DialogInterface, i: Int ->
+            dialog.setPositiveButton(it) { dialogInterface: DialogInterface, _: Int ->
                 dialogInterface.dismiss()
             }
         }
         negativeButtonText?.let {
-            dialog.setNegativeButton(it) { dialogInterface: DialogInterface, i: Int ->
+            dialog.setNegativeButton(it) { dialogInterface: DialogInterface, _: Int ->
                 dialogInterface.dismiss()
             }
         }
         neutralButtonText?.let {
-            dialog.setPositiveButton(it) { dialogInterface: DialogInterface, i: Int ->
+            dialog.setPositiveButton(it) { dialogInterface: DialogInterface, _: Int ->
                 dialogInterface.dismiss()
             }
         }
@@ -116,18 +116,20 @@ class MainFragment : Fragment() {
 
     private fun bindObservers() {
         postViewModel.postResponseResponseLiveData.observe(viewLifecycleOwner) { networkResult ->
-            binding.progressBar.isVisible = false
+            binding.postsShimmerParentLayout.isVisible = false
             when (networkResult) {
                 is NetworkResult.Success -> {
+                    stopAndHideShimmer()
                     networkResult.data?.let {
                         postAdapter.submitPostResponse(networkResult.data)
                     }
                 }
                 is NetworkResult.Error -> {
+                    stopAndHideShimmer()
                     Toast.makeText(requireContext(), networkResult.message, Toast.LENGTH_SHORT).show()
                 }
                 is NetworkResult.Loading -> {
-                    binding.progressBar.isVisible = true
+                    startShimmer()
                 }
             }
         }
@@ -153,6 +155,16 @@ class MainFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun startShimmer() {
+        binding.postsShimmerParentLayout.isVisible = true
+        binding.postsShimmerLayout.root.startShimmer()
+    }
+
+    private fun stopAndHideShimmer() {
+        binding.postsShimmerLayout.root.stopShimmer()
+        binding.postsShimmerParentLayout.isVisible = false
     }
 
     private fun onPostClicked(post: Post) {

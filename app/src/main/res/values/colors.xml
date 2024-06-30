@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_gray">#a2a2a2</color>
+    <color name="shimmer_light_gray_bg">#DBDBDB</color>
     <color name="highlight_text_color">#2196F3</color>
     <color name="highlight_text_color_red">#F44336</color>
 </resources>

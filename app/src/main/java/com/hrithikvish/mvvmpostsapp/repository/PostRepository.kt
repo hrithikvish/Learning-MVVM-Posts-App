@@ -25,9 +25,11 @@ class PostRepository @Inject constructor(
     val addUpdateDeletePostResponseLiveData: LiveData<NetworkResult<Post>> get() = _addUpdateDeletePostResponseLiveData
 
     suspend fun getPosts(limit: Int, skip: Int) {
-        _getPostsResponseLiveData.postValue(NetworkResult.Loading())
-        val response = postsApi.getPosts(limit = limit, skip = skip)
-        NetworkResultHelper.handleResponse(_getPostsResponseLiveData, response)
+        if(_getPostsResponseLiveData.value?.data == null) {
+            _getPostsResponseLiveData.postValue(NetworkResult.Loading())
+            val response = postsApi.getPosts(limit = limit, skip = skip)
+            NetworkResultHelper.handleResponse(_getPostsResponseLiveData, response)
+        }
     }
 
     suspend fun addPost(postRequest: PostRequest) {
