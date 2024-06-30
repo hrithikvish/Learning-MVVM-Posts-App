@@ -6,4 +6,5 @@
     <color name="shimmer_light_gray_bg">#DBDBDB</color>
     <color name="highlight_text_color">#2196F3</color>
     <color name="highlight_text_color_red">#F44336</color>
+    <color name="splash_bg">#94CCE7</color>
 </resources>
