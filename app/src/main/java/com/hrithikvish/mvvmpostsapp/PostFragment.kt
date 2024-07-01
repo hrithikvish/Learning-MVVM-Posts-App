@@ -67,15 +67,11 @@ class PostFragment : Fragment() {
     }
 
     private fun bindObservers() {
-        postViewModel.addUpdateDeletePostResponseLiveData.observe(viewLifecycleOwner) { networkResult ->
+        postViewModel.updateDeletePostResponseLiveData.observe(viewLifecycleOwner) { networkResult ->
             when(networkResult) {
                 is NetworkResult.Success -> {
                     val successMessage: String
                     when (networkResult.operation) {
-                        Operation.ADD_POST -> {
-                            successMessage = "Post added successfully"
-                            binding.responseTvHead.text = "Create Response:"
-                        }
                         Operation.UPDATE_POST -> {
                             successMessage = "Post updated successfully"
                             binding.responseTvHead.text = "Update Response:"

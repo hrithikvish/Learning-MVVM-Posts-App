@@ -20,8 +20,10 @@ class PostViewModel @Inject constructor(
 
     val postResponseResponseLiveData: LiveData<NetworkResult<PostResponse>>
         get() = postRepository.getPostsResponseLiveData
-    val addUpdateDeletePostResponseLiveData: LiveData<NetworkResult<Post>>
-        get() = postRepository.addUpdateDeletePostResponseLiveData
+    val updateDeletePostResponseLiveData: LiveData<NetworkResult<Post>>
+        get() = postRepository.updateDeletePostResponseLiveData
+    val addPostResponseLiveData: LiveData<NetworkResult<Post>>
+        get() = postRepository.addPostResponseLiveData
 
     fun getPosts(
         limit: Int = 30,

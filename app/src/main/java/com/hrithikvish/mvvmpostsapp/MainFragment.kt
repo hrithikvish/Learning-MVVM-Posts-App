@@ -2,12 +2,12 @@ package com.hrithikvish.mvvmpostsapp
 
 import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -20,7 +20,6 @@ import com.hrithikvish.mvvmpostsapp.util.ConnectivityChecker
 import com.hrithikvish.mvvmpostsapp.util.Constants
 import com.hrithikvish.mvvmpostsapp.util.NetworkResult
 import com.hrithikvish.mvvmpostsapp.util.Operation
-import com.hrithikvish.mvvmpostsapp.util.UserIdManager
 import com.hrithikvish.mvvmpostsapp.viewmodel.PostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -107,7 +106,6 @@ class MainFragment : Fragment() {
 
     private fun setClickListeners() {
         binding.addPostBtn.setOnClickListener {
-//            findNavController().navigate(R.id.action_mainFragment_to_postFragment)
             AddPostBottomSheetDialogFragment().show(parentFragmentManager, "addPost")
         }
     }
@@ -132,13 +130,12 @@ class MainFragment : Fragment() {
             }
         }
 
-        postViewModel.addUpdateDeletePostResponseLiveData.observe(viewLifecycleOwner) { networkResult ->
+        postViewModel.updateDeletePostResponseLiveData.observe(viewLifecycleOwner) { networkResult ->
             binding.progressBar.isVisible = false
             when(networkResult) {
                 is NetworkResult.Success -> {
                     val operation = networkResult.operation
                     val successMessage = when(operation) {
-                        Operation.ADD_POST -> "Post added successfully"
                         Operation.UPDATE_POST -> "Post updated successfully"
                         Operation.DELETE_POST -> "Post deleted successfully"
                         else -> "Operation completed successfully"

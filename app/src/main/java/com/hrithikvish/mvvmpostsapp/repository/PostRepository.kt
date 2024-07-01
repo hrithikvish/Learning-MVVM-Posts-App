@@ -21,8 +21,11 @@ class PostRepository @Inject constructor(
     private var _getPostsResponseLiveData = MutableLiveData<NetworkResult<PostResponse>>()
     val getPostsResponseLiveData: LiveData<NetworkResult<PostResponse>> get() = _getPostsResponseLiveData
 
-    private var _addUpdateDeletePostResponseLiveData = MutableLiveData<NetworkResult<Post>>()
-    val addUpdateDeletePostResponseLiveData: LiveData<NetworkResult<Post>> get() = _addUpdateDeletePostResponseLiveData
+    private var _updateDeletePostResponseLiveData = MutableLiveData<NetworkResult<Post>>()
+    val updateDeletePostResponseLiveData: LiveData<NetworkResult<Post>> get() = _updateDeletePostResponseLiveData
+
+    private var _addPostResponseLiveData = MutableLiveData<NetworkResult<Post>>()
+    val addPostResponseLiveData: LiveData<NetworkResult<Post>> get() = _addPostResponseLiveData
 
     suspend fun getPosts(limit: Int, skip: Int) {
         if(_getPostsResponseLiveData.value?.data == null) {
@@ -33,24 +36,24 @@ class PostRepository @Inject constructor(
     }
 
     suspend fun addPost(postRequest: PostRequest) {
-        _addUpdateDeletePostResponseLiveData.postValue(NetworkResult.Loading())
+        _addPostResponseLiveData.postValue(NetworkResult.Loading())
         val response = postsApi.addPost(postRequest)
         Log.d(Constants.TAG, "addPost: ${response.body()}")
-        NetworkResultHelper.handleResponse(_addUpdateDeletePostResponseLiveData, response, Operation.ADD_POST)
+        NetworkResultHelper.handleResponse(_addPostResponseLiveData, response)
     }
 
     suspend fun updatePost(postUpdateRequest: PostUpdateRequest, postId: Int) {
-        _addUpdateDeletePostResponseLiveData.postValue(NetworkResult.Loading())
+        _updateDeletePostResponseLiveData.postValue(NetworkResult.Loading())
         val response = postsApi.updatePost(postId, postUpdateRequest)
         Log.d(Constants.TAG, "updatePost: ${response.body()}")
-        NetworkResultHelper.handleResponse(_addUpdateDeletePostResponseLiveData, response, Operation.UPDATE_POST)
+        NetworkResultHelper.handleResponse(_updateDeletePostResponseLiveData, response, Operation.UPDATE_POST)
     }
 
     suspend fun deletePost(postId: Int) {
-        _addUpdateDeletePostResponseLiveData.postValue(NetworkResult.Loading())
+        _updateDeletePostResponseLiveData.postValue(NetworkResult.Loading())
         val response = postsApi.deletePost(postId)
         Log.d(Constants.TAG, "deletePost: ${response.body()}")
-        NetworkResultHelper.handleResponse(_addUpdateDeletePostResponseLiveData, response, Operation.DELETE_POST)
+        NetworkResultHelper.handleResponse(_updateDeletePostResponseLiveData, response, Operation.DELETE_POST)
     }
 
 }

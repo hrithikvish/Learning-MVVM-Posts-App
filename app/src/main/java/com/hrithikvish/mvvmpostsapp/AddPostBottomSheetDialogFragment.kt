@@ -1,26 +1,31 @@
 package com.hrithikvish.mvvmpostsapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hrithikvish.mvvmpostsapp.databinding.FragmentAddPostBottomSheetDialogBinding
 import com.hrithikvish.mvvmpostsapp.model.postModel.PostRequest
+import com.hrithikvish.mvvmpostsapp.util.NetworkResult
 import com.hrithikvish.mvvmpostsapp.util.UserIdManager
 import com.hrithikvish.mvvmpostsapp.viewmodel.PostViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@SuppressLint("SetTextI18n")
+@AndroidEntryPoint
 class AddPostBottomSheetDialogFragment: BottomSheetDialogFragment() {
 
     private var _binding: FragmentAddPostBottomSheetDialogBinding? = null
     private val binding get() = _binding!!
-    private lateinit var postViewModel: PostViewModel
+    private val postViewModel by viewModels<PostViewModel>()
 
     @Inject
     lateinit var userIdManager: UserIdManager
@@ -29,7 +34,7 @@ class AddPostBottomSheetDialogFragment: BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddPostBottomSheetDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -40,12 +45,24 @@ class AddPostBottomSheetDialogFragment: BottomSheetDialogFragment() {
         setTransparentBackground()
         setWidthHeight()
         setFullHeight()
-        initViewModel()
         setClickListeners()
+        bindObservers()
     }
 
-    private fun initViewModel() {
-        postViewModel = ViewModelProvider(requireActivity())[PostViewModel::class.java]
+    private fun bindObservers() {
+        postViewModel.addPostResponseLiveData.observe(viewLifecycleOwner) { networkResult ->
+            when(networkResult) {
+                is NetworkResult.Success -> {
+                    Toast.makeText(requireContext(), "Post added successfully", Toast.LENGTH_SHORT).show()
+                    binding.responseTvHead.text = "Create Response:"
+                    binding.responseTv.text = networkResult.data.toString()
+                }
+                is NetworkResult.Error -> {
+                    Toast.makeText(requireContext(), networkResult.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Loading -> { }
+            }
+        }
     }
 
     private fun setClickListeners() {
