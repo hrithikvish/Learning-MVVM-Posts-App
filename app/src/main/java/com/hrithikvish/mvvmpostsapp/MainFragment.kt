@@ -35,9 +35,6 @@ class MainFragment : Fragment() {
     private lateinit var postAdapter: PostAdapter
 
     @Inject
-    lateinit var userIdManager: UserIdManager
-
-    @Inject
     lateinit var connectivityChecker: ConnectivityChecker
 
     override fun onCreateView(
@@ -110,7 +107,8 @@ class MainFragment : Fragment() {
 
     private fun setClickListeners() {
         binding.addPostBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_postFragment)
+//            findNavController().navigate(R.id.action_mainFragment_to_postFragment)
+            AddPostBottomSheetDialogFragment().show(parentFragmentManager, "addPost")
         }
     }
 
