@@ -126,22 +126,21 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             tools:text="Update Response:"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:textColor="@color/highlight_text_color"
             android:textSize="14sp" />
 
-        <ScrollView
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/create_post_progress_bar"
             android:layout_width="match_parent"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
-
-            <TextView
-                android:id="@+id/response_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-        </ScrollView>
+            android:layout_marginTop="20dp"
+            android:indeterminate="true"
+            app:indicatorColor="@color/black"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
     </LinearLayout>
 

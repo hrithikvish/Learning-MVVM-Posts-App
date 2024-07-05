@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.google.android.material.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -53,14 +55,23 @@ class AddPostBottomSheetDialogFragment: BottomSheetDialogFragment() {
         postViewModel.addPostResponseLiveData.observe(viewLifecycleOwner) { networkResult ->
             when(networkResult) {
                 is NetworkResult.Success -> {
-                    Toast.makeText(requireContext(), "Post added successfully", Toast.LENGTH_SHORT).show()
-                    binding.responseTvHead.text = "Create Response:"
-                    binding.responseTv.text = networkResult.data.toString()
+                    binding.createPostProgressBar.isVisible = false
+                    CreateUpdateDeleteResponseDialog(
+                        requireContext(),
+                        "Created Post:",
+                        networkResult.data
+                    ).show()
                 }
                 is NetworkResult.Error -> {
+                    binding.createPostProgressBar.isVisible = false
+                    binding.responseTvHead.isVisible = true
+                    binding.responseTvHead.setTextColor(ContextCompat.getColor(requireContext(), R.color.design_default_color_error))
+                    binding.responseTvHead.text = "Something went wrong, try again."
                     Toast.makeText(requireContext(), networkResult.message, Toast.LENGTH_SHORT).show()
                 }
-                is NetworkResult.Loading -> { }
+                is NetworkResult.Loading -> {
+                    binding.createPostProgressBar.isVisible = true
+                }
             }
         }
     }
