@@ -2,19 +2,24 @@ package com.hrithikvish.mvvmpostsapp
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.google.android.material.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.chip.Chip
 import com.hrithikvish.mvvmpostsapp.databinding.FragmentAddPostBottomSheetDialogBinding
 import com.hrithikvish.mvvmpostsapp.model.postModel.PostRequest
+import com.hrithikvish.mvvmpostsapp.util.ChipUtility.Companion.addChipIntoChipGroup
 import com.hrithikvish.mvvmpostsapp.util.NetworkResult
 import com.hrithikvish.mvvmpostsapp.util.UserIdManager
 import com.hrithikvish.mvvmpostsapp.viewmodel.PostViewModel
@@ -48,6 +53,7 @@ class AddPostBottomSheetDialogFragment: BottomSheetDialogFragment() {
         setWidthHeight()
         setFullHeight()
         setClickListeners()
+        setTextChangedListeners()
         bindObservers()
     }
 
@@ -83,9 +89,35 @@ class AddPostBottomSheetDialogFragment: BottomSheetDialogFragment() {
         binding.btnSubmit.setOnClickListener {
             val postTitle = binding.txtTitle.text.toString()
             val postBody = binding.txtBody.text.toString()
-            postViewModel.addPost(PostRequest(userIdManager.getUserId(), postTitle, postBody))
+            val tagsList = getTagsListFromTagsChipGroup()
+            postViewModel.addPost(
+                PostRequest(
+                    userIdManager.getUserId(),
+                    postTitle,
+                    postBody,
+                    tagsList
+                )
+            )
         }
     }
+
+    private fun setTextChangedListeners() {
+        binding.tagsEdt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(!s.isNullOrEmpty() && s.last() == ' ') {
+                    val tag = s.trim().toString()
+                    addChipIntoChipGroup(requireActivity(), tag, binding.postTagsChipGroup)
+                    binding.tagsEdt.text.clear()
+                }
+            }
+            override fun afterTextChanged(s: Editable?) { }
+        })
+    }
+
+    private fun getTagsListFromTagsChipGroup() = binding.postTagsChipGroup.children.map {
+        (it as Chip).text.toString()
+    }.toList()
 
     private fun setFullHeight() {
         (dialog as BottomSheetDialog).behavior.state = BottomSheetBehavior.STATE_EXPANDED

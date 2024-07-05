@@ -108,6 +108,44 @@
             android:layout_marginTop="16dp"
             android:background="@color/light_gray" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/post_tags"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/tagsEdt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:background="@android:color/transparent"
+            android:hint="@string/txt_title_hint"
+            android:textColor="@color/black"
+            android:textColorHint="@color/light_gray"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/light_gray" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/postTagsChipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleLine="true" />
+
+        </HorizontalScrollView>
+
         <Button
             android:id="@+id/btn_submit"
             style="@style/Widget.Material3.Button"

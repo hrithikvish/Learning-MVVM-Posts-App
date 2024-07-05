@@ -5,6 +5,7 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:statusBarColor">@color/light_gray</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
+        <item name="chipStyle">@style/CustomActionChip</item>
     </style>
 
     <style name="Theme.MVVMNotesApp" parent="Base.Theme.MVVMNotesApp" />
@@ -24,6 +25,13 @@
         <item name="windowSplashScreenBackground">@color/splash_bg</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/feather_ink_icon</item>
         <item name="postSplashScreenTheme">@style/Theme.MVVMNotesApp</item>
+    </style>
+
+    <style name="CustomActionChip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipBackgroundColor">@color/light_gray</item>
+        <item name="chipStrokeColor">@color/light_gray</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>
