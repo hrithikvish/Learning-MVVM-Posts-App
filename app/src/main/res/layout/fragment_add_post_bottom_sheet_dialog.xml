@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,178 +8,187 @@
     android:background="@drawable/rounded_top_corners_bg">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayoutTapper"
-        android:layout_width="40dp"
-        android:layout_height="4dp"
-        android:layout_marginTop="9dp"
-        android:background="@drawable/bg_ios_tap_element"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/add_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="Add Post"
-        android:textColor="@color/black"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayoutTapper" />
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/btn_cancel"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/ic_cancel"
-        app:layout_constraintEnd_toEndOf="@+id/add_text"
-        app:layout_constraintTop_toTopOf="@id/add_text"
-        app:layout_constraintBottom_toBottomOf="@id/add_text"
-        app:tint="@color/black" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:orientation="vertical"
-        android:paddingBottom="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_text">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutTapper"
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="9dp"
+            android:background="@drawable/bg_ios_tap_element"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/note_title"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
-
-        <EditText
-            android:id="@+id/txt_title"
+            android:id="@+id/add_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:background="@android:color/transparent"
-            android:hint="@string/txt_title_hint"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="Add Post"
             android:textColor="@color/black"
-            android:textColorHint="@color/light_gray"
-            android:textSize="16sp" />
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayoutTapper" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/light_gray" />
+        <ImageView
+            android:id="@+id/btn_cancel"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_cancel"
+            app:layout_constraintBottom_toBottomOf="@id/add_text"
+            app:layout_constraintEnd_toEndOf="@+id/add_text"
+            app:layout_constraintTop_toTopOf="@id/add_text"
+            app:tint="@color/black" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/txt_body"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
-
-        <EditText
-            android:id="@+id/txt_body"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:background="@android:color/transparent"
-            android:gravity="top|start"
-            android:hint="@string/txt_body_hint"
-            android:inputType="textMultiLine"
-            android:lines="5"
-            android:scrollbars="vertical"
-            android:scrollHorizontally="false"
-            android:textColor="@color/black"
-            android:textColorHint="@color/light_gray"
-            android:textSize="16sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/light_gray" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/post_tags"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
-
-        <EditText
-            android:id="@+id/tagsEdt"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:background="@android:color/transparent"
-            android:hint="@string/txt_title_hint"
-            android:textColor="@color/black"
-            android:textColorHint="@color/light_gray"
-            android:textSize="16sp" />
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_text">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/light_gray" />
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/postTagsChipGroup"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:singleLine="true" />
+                android:layout_marginTop="24dp"
+                android:text="@string/note_title"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
 
-        </HorizontalScrollView>
+            <EditText
+                android:id="@+id/txt_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/txt_title_hint"
+                android:textColor="@color/black"
+                android:textColorHint="@color/light_gray"
+                android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/btn_submit"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="@color/black"
-            android:text="@string/txt_submit"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/light_gray" />
 
-        <TextView
-            android:id="@+id/response_tv_head"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            tools:text="Update Response:"
-            android:visibility="gone"
-            tools:visibility="visible"
-            android:textColor="@color/highlight_text_color"
-            android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/txt_body"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/create_post_progress_bar"
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:indeterminate="true"
-            app:indicatorColor="@color/black"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            <EditText
+                android:id="@+id/txt_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:background="@android:color/transparent"
+                android:gravity="top|start"
+                android:hint="@string/txt_body_hint"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false"
+                android:textColor="@color/black"
+                android:textColorHint="@color/light_gray"
+                android:textSize="16sp" />
 
-    </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/light_gray" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/post_tags"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/tagsEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/txt_tags_hint"
+                android:imeOptions="actionSend"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/light_gray"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/light_gray" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/postTagsChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleLine="true" />
+
+            </HorizontalScrollView>
+
+            <Button
+                android:id="@+id/btn_submit"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/black"
+                android:text="@string/txt_submit"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/response_tv_head"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/highlight_text_color"
+                android:textSize="14sp"
+                android:visibility="gone"
+                tools:text="Some Error Message"
+                tools:visibility="visible" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/create_post_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:indicatorColor="@color/black"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

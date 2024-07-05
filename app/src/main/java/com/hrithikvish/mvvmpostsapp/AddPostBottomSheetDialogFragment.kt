@@ -2,11 +2,13 @@ package com.hrithikvish.mvvmpostsapp
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
@@ -52,8 +54,7 @@ class AddPostBottomSheetDialogFragment: BottomSheetDialogFragment() {
         setTransparentBackground()
         setWidthHeight()
         setFullHeight()
-        setClickListeners()
-        setTextChangedListeners()
+        setListeners()
         bindObservers()
     }
 
@@ -82,7 +83,8 @@ class AddPostBottomSheetDialogFragment: BottomSheetDialogFragment() {
         }
     }
 
-    private fun setClickListeners() {
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setListeners() {
         binding.btnCancel.setOnClickListener {
             dialog?.dismiss()
         }
@@ -99,20 +101,30 @@ class AddPostBottomSheetDialogFragment: BottomSheetDialogFragment() {
                 )
             )
         }
-    }
 
-    private fun setTextChangedListeners() {
-        binding.tagsEdt.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(!s.isNullOrEmpty() && s.last() == ' ') {
-                    val tag = s.trim().toString()
+        // clicking send button on keyboard adds the editText content as a "Tag" chip
+        val tagString = binding.tagsEdt.text
+        binding.tagsEdt.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                if (!tagString.isNullOrEmpty() && actionId == EditorInfo.IME_ACTION_SEND) {
+                    val tag = tagString.toString().trim()
                     addChipIntoChipGroup(requireActivity(), tag, binding.postTagsChipGroup)
                     binding.tagsEdt.text.clear()
+                    return true
                 }
+                return false
             }
-            override fun afterTextChanged(s: Editable?) { }
         })
+
+        // solves the problem when trying to scroll editText the bottomSheet scrolls instead
+        binding.txtBody.setOnTouchListener { v, event ->
+            v.parent.requestDisallowInterceptTouchEvent(true)
+            when (event.action and MotionEvent.ACTION_MASK) {
+                MotionEvent.ACTION_UP ->
+                    v.parent.requestDisallowInterceptTouchEvent(false)
+            }
+            false
+        }
     }
 
     private fun getTagsListFromTagsChipGroup() = binding.postTagsChipGroup.children.map {
