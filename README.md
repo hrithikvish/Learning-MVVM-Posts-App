@@ -8,6 +8,6 @@ This app was(is being) created as a learning project to showcase and practice th
 
 ## Contact
 
-Your Name - [hrithikvishwakarma05@gmail.com](mailto:hrithikvishwakarma05@gmail.com)
+Hrithik Vishwakarma - [hrithikvishwakarma05@gmail.com](mailto:hrithikvishwakarma05@gmail.com)
 
 Project Link: [https://github.com/hrithikvish/Learning-MVVM-Posts-App](https://github.com/hrithikvish/Learning-MVVM-Posts-App)
